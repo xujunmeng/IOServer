@@ -1,0 +1,15 @@
+package 第十课自定义数据包协议.com.com.cn.model;
+
+public interface StateCode {
+	
+	/**
+	 * 成功
+	 */
+	public static int SUCCESS  = 0;
+	
+	/**
+	 * 失败
+	 */
+	public static int FAIL  =  1;
+
+}
