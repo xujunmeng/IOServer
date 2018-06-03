@@ -1,20 +1,19 @@
-package 第十课自定义数据包协议.com.com.cn.codc;
+package 第十课自定义数据包协议.com.cn.codc;
 
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.channel.Channel;
 import org.jboss.netty.channel.ChannelHandlerContext;
 import org.jboss.netty.handler.codec.frame.FrameDecoder;
-import 第十课自定义数据包协议.com.com.cn.constant.ConstantValue;
-import 第十课自定义数据包协议.com.com.cn.model.Request;
-
+import 第十课自定义数据包协议.com.cn.constant.ConstantValue;
+import 第十课自定义数据包协议.com.cn.model.Response;
 
 /**
- * 请求解码器
+ * response解码器
  * <pre>
  * 数据包格式
- * +——----——+——-----——+——----——+——----——+——-----——+
- * | 包头          | 模块号        | 命令号      |  长度        |   数据       |
- * +——----——+——-----——+——----——+——----——+——-----——+
+ * +——----——+——-----——+——----——+——----——+——-----——+——-----——+
+ * | 包头          | 模块号        | 命令号       |  状态码    |  长度          |   数据       |
+ * +——----——+——-----——+——----——+——----——+——-----——+——-----——+
  * </pre>
  * 包头4字节
  * 模块号2字节short
@@ -24,7 +23,7 @@ import 第十课自定义数据包协议.com.com.cn.model.Request;
  * @author -琴兽-
  *
  */
-public class RequestDecoder extends FrameDecoder{
+public class ResponseDecoder extends FrameDecoder{
 	
 	/**
 	 * 数据包基本长度
@@ -36,28 +35,13 @@ public class RequestDecoder extends FrameDecoder{
 		
 		//可读长度必须大于基本长度
 		if(buffer.readableBytes() >= BASE_LENTH){
-			//防止socket字节流攻击
-			if(buffer.readableBytes() > 2048){
-				buffer.skipBytes(buffer.readableBytes());
-			}
 			
-			//记录包头开始的index(读指针)
-			int beginReader;
+			//记录包头开始的index
+			int beginReader = buffer.readerIndex();
 			
 			while(true){
-				beginReader = buffer.readerIndex();
-				buffer.markReaderIndex();
 				if(buffer.readInt() == ConstantValue.FLAG){
 					break;
-				}
-				
-				//未读到包头，略过一个字节
-				buffer.resetReaderIndex();
-				buffer.readByte();
-				
-				//长度又变得不满足
-				if(buffer.readableBytes() < BASE_LENTH){
-					return null;
 				}
 			}
 			
@@ -65,27 +49,28 @@ public class RequestDecoder extends FrameDecoder{
 			short module = buffer.readShort();
 			//命令号
 			short cmd = buffer.readShort();
+			//状态码
+			int stateCode = buffer.readInt();
 			//长度
 			int length = buffer.readInt();
 			
-			//判断请求数据包数据是否到齐
 			if(buffer.readableBytes() < length){
 				//还原读指针
 				buffer.readerIndex(beginReader);
 				return null;
 			}
 			
-			//读取data数据
 			byte[] data = new byte[length];
 			buffer.readBytes(data);
 			
-			Request request = new Request();
-			request.setModule(module);
-			request.setCmd(cmd);
-			request.setData(data);
+			Response response = new Response();
+			response.setModule(module);
+			response.setCmd(cmd);
+			response.setStateCode(stateCode);
+			response.setData(data);
 			
 			//继续往下传递 
-			return request;
+			return response;
 			
 		}
 		//数据包不完整，需要等待后面的包来

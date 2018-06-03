@@ -1,4 +1,4 @@
-package 第十课自定义数据包协议.com.com.cn.serial;
+package 第十课自定义数据包协议.com.cn.serial;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;

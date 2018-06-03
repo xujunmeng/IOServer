@@ -1,12 +1,12 @@
-package 第十课自定义数据包协议.com.com.cn.codc;
+package 第十课自定义数据包协议.com.cn.codc;
 
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.buffer.ChannelBuffers;
 import org.jboss.netty.channel.Channel;
 import org.jboss.netty.channel.ChannelHandlerContext;
 import org.jboss.netty.handler.codec.oneone.OneToOneEncoder;
-import 第十课自定义数据包协议.com.com.cn.constant.ConstantValue;
-import 第十课自定义数据包协议.com.com.cn.model.Response;
+import 第十课自定义数据包协议.com.cn.constant.ConstantValue;
+import 第十课自定义数据包协议.com.cn.model.Response;
 
 /**
  * 请求编码器

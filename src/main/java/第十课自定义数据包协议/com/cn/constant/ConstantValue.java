@@ -1,4 +1,4 @@
-package 第十课自定义数据包协议.com.com.cn.constant;
+package 第十课自定义数据包协议.com.cn.constant;
 
 public interface ConstantValue {
 	

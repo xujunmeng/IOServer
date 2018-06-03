@@ -1,4 +1,4 @@
-package 第十课自定义数据包协议.com.com.cn.model;
+package 第十课自定义数据包协议.com.cn.model;
 /**
  * 请求对象
  * @author -琴兽-

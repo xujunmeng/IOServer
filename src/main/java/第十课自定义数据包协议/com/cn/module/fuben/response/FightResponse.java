@@ -1,8 +1,8 @@
-package 第十课自定义数据包协议.com.com.cn.module.fuben.response;
+package 第十课自定义数据包协议.com.cn.module.fuben.response;
 
-import 第十课自定义数据包协议.com.com.cn.serial.Serializer;
+import 第十课自定义数据包协议.com.cn.serial.Serializer;
 
-public class FightResponse extends Serializer{
+public class FightResponse extends Serializer {
 
 	/**
 	 * 获取金币
