@@ -6,11 +6,11 @@ import org.jboss.netty.channel.ExceptionEvent;
 import org.jboss.netty.channel.MessageEvent;
 import org.jboss.netty.channel.SimpleChannelHandler;
 
-import com.cn.model.Request;
-import com.cn.model.Response;
-import com.cn.model.StateCode;
-import com.cn.module.fuben.request.FightRequest;
-import com.cn.module.fuben.response.FightResponse;
+import 第十课自定义数据包协议.com.cn.model.Request;
+import 第十课自定义数据包协议.com.cn.model.Response;
+import 第十课自定义数据包协议.com.cn.model.StateCode;
+import 第十课自定义数据包协议.com.cn.module.fuben.request.FightRequest;
+import 第十课自定义数据包协议.com.cn.module.fuben.response.FightResponse;
 /**
  * 消息接受处理类
  * @author -琴兽-
